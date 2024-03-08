@@ -6,5 +6,7 @@ public class ClearCommand extends Command {
         super(model);
     }
 
-    public void execute() {}
+    public void execute() {
+        // Implement this method
+    }
 }

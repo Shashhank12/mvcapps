@@ -7,6 +7,7 @@ public class StoplightView extends View {
 
     public StoplightView(Stoplight light) {
         super(light);
+        setBackground(Color.PINK);
     }
 
     public void paintComponent(Graphics gc) {
