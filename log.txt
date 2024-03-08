@@ -1,0 +1,13 @@
+load 0 0
+load 1 100
+load 2 2
+load 3 1
+load 4 2
+load 5 -1
+
+mul 4 2 4
+mul 4 5 4
+add 0 3 0
+add 4 1 6
+mul 4 5 4
+bgt 6 -6
