@@ -6,12 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.*;
 
-public class AppPanel extends JPanel implements ActionListener, PropertyChangeListener {
+public class AppPanel extends JPanel implements ActionListener, Subscriber {
 
     protected AppFactory factory;
     protected Model model;
     protected View view;
-    protected ControlPanel controlPanel;
+    protected JPanel controlPanel;
     private JFrame frame;
     public static int FRAME_WIDTH = 500;
     public static int FRAME_HEIGHT = 300;
@@ -19,14 +19,18 @@ public class AppPanel extends JPanel implements ActionListener, PropertyChangeLi
         this.factory = factory;
         this.model = factory.makeModel();
         this.view = factory.makeView(model);
-        this.controlPanel = new ControlPanel();
+        view.setBackground(Color.GRAY);
+        this.controlPanel = new JPanel();
+        controlPanel.setBackground(Color.PINK);
         this.add(controlPanel);
         setLayout(new GridLayout(1, 2));
         this.add(view);
-        if (model != null)
+        if (model != null) {
             model.addPropertyChangeListener(this);
+            model.subscribe(this);
+        }
 
-        frame = new JFrame();
+        frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
         frame.setJMenuBar(createMenuBar());
@@ -61,7 +65,12 @@ public class AppPanel extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     public void setModel(Model model) {
+        this.model.unsubscribe(this);
         this.model = model;
+        this.model.subscribe(this);
+        view.setModel(this.model);
+        model.changed();
+
         view.setModel(model);
     }
 
@@ -98,11 +107,5 @@ public class AppPanel extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
-
-    protected class ControlPanel extends JPanel {
-        public ControlPanel() {}
-    }
+    public void update() {/* no op, override if needed*/}
 }

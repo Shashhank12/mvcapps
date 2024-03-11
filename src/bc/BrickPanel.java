@@ -3,7 +3,6 @@ package bc;
 import mvc.*;
 import javax.swing.*;
 import java.awt.*;
-import java.beans.PropertyChangeEvent;
 
 public class BrickPanel extends AppPanel {
 
@@ -45,8 +44,8 @@ public class BrickPanel extends AppPanel {
         controlPanel.add(p);
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-        super.propertyChange(evt);
+    @Override
+    public void update() {
         Brick brick = (Brick) model;
         heightField.setText("" + brick.getHeight());
         widthField.setText("" + brick.getWidth());
@@ -58,4 +57,6 @@ public class BrickPanel extends AppPanel {
         AppPanel panel = new BrickPanel(factory);
         panel.display();
     }
+
+
 }

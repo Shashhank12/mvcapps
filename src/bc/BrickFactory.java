@@ -5,6 +5,7 @@ import mvc.*;
 import java.awt.*;
 import javax.swing.*;
 
+
 public class BrickFactory implements AppFactory {
     @Override
     public Model makeModel() {
@@ -21,13 +22,6 @@ public class BrickFactory implements AppFactory {
         bv.add(new TopView(model));
 
         bv.add(new FrontView(model));
-        /*
-        bv.setLayout(new BorderLayout());
-        bv.add(new SideView(model), BorderLayout.WEST);
-        bv.add(new FrontView(model), BorderLayout.EAST);
-        bv.add(new TopView(model), BorderLayout.SOUTH);
-
-         */
         return bv;
     }
 
@@ -39,19 +33,19 @@ public class BrickFactory implements AppFactory {
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
         Command cmmd = null;
-        if (type.equals("SetHeight")) {
+        if (type == "SetHeight") {
             cmmd = new SetHeight(model);
             if (source instanceof JTextField) {
                 ((SetHeight)cmmd).newValue = Double.parseDouble(((JTextField)source).getText());
             }
         }
-        else if (type.equals("SetWidth")) {
+        else if (type == "SetWidth") {
             cmmd = new SetWidth(model);
             if (source instanceof JTextField) {
                 ((SetWidth)cmmd).newValue = Double.parseDouble(((JTextField)source).getText());
             }
         }
-        else if (type.equals("SetLength")) {
+        else if (type == "SetLength") {
             cmmd = new SetLength(model);
             if (source instanceof JTextField) {
                 ((SetLength)cmmd).newValue = Double.parseDouble(((JTextField)source).getText());
