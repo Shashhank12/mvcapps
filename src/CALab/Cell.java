@@ -16,12 +16,34 @@ abstract class Cell extends Publisher implements Serializable {
     // choose a random neighbor as a partner
     public void choosePartner() {
         if (partner == null && neighbors != null) {
-			/*
+        	/*
 			Set partner to null
 			Convert neighbors set to a local array
 			Starting at a random position in the array search for a neighbor without a partner
 			Make the first such neighbor (if any) the partner and set its partner field to this
 			*/
+        	
+        	
+        	// 1. unsure why we are using set. Need to ask him.
+        	// 2. Why convert neighbors to local array? When we change local array, doesn't it 
+        	// not affect the neighbors set?
+        	partner = null;
+        	Cell[] cellArr = (Cell[]) neighbors.toArray();
+        	Random rand = new Random();
+        	int randInt = rand.nextInt(neighbors.size());
+        	int checked = 0;
+        	while (checked != neighbors.size()) {
+        		if (randInt > neighbors.size()) {
+        			randInt = 0;
+        		} else {
+        			if (cellArr[randInt].partner != null) {
+        				this.partner = cellArr[randInt];
+        				cellArr[randInt].partner = this;
+        			}
+                	randInt++;
+        		}
+        		checked++;
+        	}
         }
 
     }
