@@ -26,16 +26,36 @@ public abstract class Grid extends Model {
     protected void populate() {
         // 1. use makeCell to fill in cells
         // 2. use getNeighbors to set the neighbors field of each cell
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col] = makeCell(true);
+            }
+        }
+
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].neighbors = getNeighbors(cells[row][col], 1);
+            }
+        }
     }
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
         if (randomly) {
-            // randomly set the status of each cell
+            for (int row = 0; row < dim; row++) {
+                for (int col = 0; col < dim; col++) {
+                    cells[row][col].reset(true);
+                }
+            }
         } else {
-            // set the status of each cell to 0 (dead)
+            for (int row = 0; row < dim; row++) {
+                for (int col = 0; col < dim; col++) {
+                    cells[row][col].reset(false);
+                }
+            }
         }
         // notify subscribers
+        notifySubscribers();
     }
 
 
@@ -46,7 +66,19 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
-        return null;
+        Set<Cell> neighbors = new HashSet<Cell>();
+        int row = asker.row;
+        int col = asker.col;
+        for (int r = row - radius; r <= row + radius; r++) {
+            for (int c = col - radius; c <= col + radius; c++) {
+                if (r >= 0 && r < dim && c >= 0 && c < dim) {
+                    if (r != row || c != col) {
+                        neighbors.add(cells[r][c]);
+                    }
+                }
+            }
+        }
+        return neighbors;
     }
 
     // overide these
@@ -57,14 +89,31 @@ public abstract class Grid extends Model {
 
     public void observe() {
         // call each cell's observe method and notify subscribers
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].observe();
+                cells[row][col].notifySubscribers();
+            }
+        }
     }
 
     public void interact() {
-        // ???
+        // call each cell's interact method
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].interact();
+            }
+        }
     }
 
     public void update() {
-        // ???
+        // call each cell's update method and notify subscribers
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].update();
+                cells[row][col].notifySubscribers();
+            }
+        }
     }
 
     public void updateLoop(int cycles) {
