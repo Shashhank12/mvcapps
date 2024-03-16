@@ -62,13 +62,16 @@ public abstract class Grid extends Model {
 
 
     public Set<Cell> getNeighbors(Cell asker, int radius) {
-        /*
+    	/*
         return the set of all cells that can be reached from the asker in radius steps.
         If radius = 1 this is just the 8 cells touching the asker.
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
         Set<Cell> neighbors = new HashSet<Cell>();
+        if (asker == null || radius <= 0) {
+        	return null;
+        }
         int row = asker.row;
         int col = asker.col;
         for (int r = row - radius; r <= row + radius; r++) {
@@ -82,7 +85,7 @@ public abstract class Grid extends Model {
         }
         return neighbors;
     }
-
+    
 
     // cell phases:
 

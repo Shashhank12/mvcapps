@@ -10,7 +10,7 @@ public class GridView extends View {
     private CellView[][] cellViews;
 
     public GridView(Model model) {
-        super(model);
+    	super(model);
         /*
         Cell cell = new CellView(((Grid)model).getCell(row, col)
         cellViews[row][col] = cell

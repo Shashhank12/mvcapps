@@ -7,7 +7,7 @@ import mvc.*;
 public class GridFactory implements AppFactory {
     @Override
     public Model makeModel() {
-        return new Grid() {
+    	return new Grid() {
             @Override
             public Cell makeCell(boolean uniform) {
                 return null;
