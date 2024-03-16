@@ -8,6 +8,6 @@ public class ClearCommand extends Command {
 
     public void execute() {
     	Grid grid = (Grid)model;
-        grid.repopulate(true);
+        grid.repopulate(false);
     }
 }

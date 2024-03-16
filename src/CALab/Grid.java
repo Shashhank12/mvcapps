@@ -41,12 +41,14 @@ public abstract class Grid extends Model {
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
+    	// randomly set status of each cell
         if (randomly) {
             for (int row = 0; row < dim; row++) {
                 for (int col = 0; col < dim; col++) {
                     cells[row][col].reset(true);
                 }
             }
+        // set the status of each cell to 0 (dead)
         } else {
             for (int row = 0; row < dim; row++) {
                 for (int col = 0; col < dim; col++) {
