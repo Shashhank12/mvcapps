@@ -81,9 +81,6 @@ public abstract class Grid extends Model {
         return neighbors;
     }
 
-    // overide these
-    public int getStatus() { return 0; }
-    public Color getColor() { return Color.GREEN; }
 
     // cell phases:
 

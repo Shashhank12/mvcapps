@@ -24,9 +24,6 @@ abstract class Cell extends Publisher implements Serializable {
 			*/
         	
         	
-        	// 1. unsure why we are using set. Need to ask him.
-        	// 2. Why convert neighbors to local array? When we change local array, doesn't it 
-        	// not affect the neighbors set?
         	partner = null;
         	Cell[] cellArr = (Cell[]) neighbors.toArray();
         	Random rand = new Random();

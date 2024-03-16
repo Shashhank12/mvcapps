@@ -1,5 +1,8 @@
 package CALab;
 
+import javax.swing.JTextField;
+
+import bc.SetWidth;
 import mvc.*;
 public class GridFactory implements AppFactory {
     @Override
@@ -49,9 +52,11 @@ public class GridFactory implements AppFactory {
         Command cmmd = null;
         if (type.equals("RUN1")) {
             cmmd = new RunCommand(model);
+            ((RunCommand)cmmd).runNumber = type;
         }
         else if (type.equals("RUN50")) {
             cmmd = new RunCommand(model);
+            ((RunCommand)cmmd).runNumber = type;
         }
         else if (type.equals("POPULATE")) {
             cmmd = new PopulateCommand(model);

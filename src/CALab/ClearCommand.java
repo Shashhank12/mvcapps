@@ -7,6 +7,7 @@ public class ClearCommand extends Command {
     }
 
     public void execute() {
-        // Implement this method
+    	Grid grid = (Grid)model;
+        grid.repopulate(true);
     }
 }
