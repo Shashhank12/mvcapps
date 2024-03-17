@@ -70,7 +70,7 @@ public abstract class Grid extends Model {
         */
         Set<Cell> neighbors = new HashSet<Cell>();
         if (asker == null || radius <= 0) {
-        	return null;
+        	return neighbors;
         }
         int row = asker.row;
         int col = asker.col;

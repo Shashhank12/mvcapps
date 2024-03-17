@@ -26,6 +26,12 @@ public class GridView extends View {
                 cell.col = col;
             }
         }
+        this.setLayout(new GridLayout(dim, dim));
+        for (int row = 0; row < dim; row++) {
+        	for (int col = 0; col < dim ; col++) {
+        		this.add(cellViews[row][col]);
+        	}
+        }
     }
 
     public void update() {

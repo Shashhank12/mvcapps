@@ -23,7 +23,8 @@ public class Society extends Grid {
 	@Override
 	public Cell makeCell(boolean uniform) {
 		// TODO Auto-generated method stub
-		return null;
+		Agent agent = new Agent();
+		return agent;
 	}
 	
 	
