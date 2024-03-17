@@ -82,6 +82,7 @@ public abstract class Grid extends Model {
                 int newCol = (col + j + dim) % dim;
                 if (newRow != row || newCol != col) {
                     neighbors.add(cells[newRow][newCol]);
+
                 }
             }
         }

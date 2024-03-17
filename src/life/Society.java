@@ -19,7 +19,8 @@ public class Society extends Grid {
 	     death.add(7);
 	     death.add(8);
 	 } */
-	
+
+
 	@Override
 	public Cell makeCell(boolean uniform) {
 		// TODO Auto-generated method stub
@@ -27,6 +28,16 @@ public class Society extends Grid {
 		return agent;
 	}
 	
-	
+	@Override
+	public Set<Cell> getNeighbors(Cell asker, int radius) {
+		ArrayList<Cell> neighborList = new ArrayList<Cell>(super.getNeighbors(asker, radius));
+
+		for (int i = neighborList.size() - 1; i >= 0 ; i--) {
+			if (neighborList.get(i).getStatus() == 0) {
+				neighborList.remove(i);
+			}
+		}
+		return new HashSet<Cell>(neighborList);
+	}
 
 }
