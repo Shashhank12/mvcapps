@@ -67,6 +67,7 @@ public abstract class Grid extends Model {
         If radius = 1 this is just the 8 cells touching the asker.
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
+        a cell on an edge is neighbors with the corresponding cell on the opposite edge
         */
         Set<Cell> neighbors = new HashSet<Cell>();
         if (asker == null || radius <= 0) {
@@ -74,13 +75,13 @@ public abstract class Grid extends Model {
         }
         int row = asker.row;
         int col = asker.col;
-        for (int r = row - radius; r <= row + radius; r++) {
-            for (int c = col - radius; c <= col + radius; c++) {
-                if (r >= 0 && r < dim && c >= 0 && c < dim) {
-                    if (r != row || c != col) {
-                        neighbors.add(cells[r][c]);
-                    }
-                }
+        
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
+            int newRow = (row + i + dim) % dim;
+            int newCol = (col + j + dim) % dim;
+            if (newRow != row || newCol != col) {
+                neighbors.add(cells[newRow][newCol]);
             }
         }
         return neighbors;
