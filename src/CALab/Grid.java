@@ -78,10 +78,11 @@ public abstract class Grid extends Model {
         
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
-            int newRow = (row + i + dim) % dim;
-            int newCol = (col + j + dim) % dim;
-            if (newRow != row || newCol != col) {
-                neighbors.add(cells[newRow][newCol]);
+                int newRow = (row + i + dim) % dim;
+                int newCol = (col + j + dim) % dim;
+                if (newRow != row || newCol != col) {
+                    neighbors.add(cells[newRow][newCol]);
+                }
             }
         }
         return neighbors;
