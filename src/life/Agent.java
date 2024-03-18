@@ -1,44 +1,50 @@
 package life;
 
 import java.awt.Color;
+import java.util.Iterator;
 
-import CALab.*;
+import CALab.Cell;
 
 public class Agent extends Cell {
-	private int status;
+	private int state; // dead or alive?
 	private int ambience;
-	
+
 	public Agent() {
-		status = 0;
-		ambience = 8;
-		notifySubscribers();
+		state = 0;
+		ambience = 0;
 	}
 
 	@Override
 	public void observe() {
 		// Each cell updates ambience
-		ambience = super.neighbors.size();
+		int sum = 0;
+		Iterator<Cell> it = super.neighbors.iterator();
+		while (it.hasNext()) {
+			sum++;
+		}
+		ambience += sum;
+		// ambience = super.neighbors.size(); // #neighbors with state == 1
 		notifySubscribers();
 	}
 
 	@Override
 	public void update() {
 		// Each cell updates status
-		if (status == 1) {
-			if (ambience < 2 || ambience > 3)
-				status = 0;
+		if (state == 1) {
+			if (ambience < 2 || ambience > 3) // Society.death.contains(ambience)
+				state = 0;
 		} else {
 			if (ambience == 3)
-				status = 1;
+				state = 1;
 		}
-		notifySubscribers();
+		notifySubscribers(); //needed?
 	}
 
 	@Override
 	public int getStatus() {
-		return status;
+		return ambience;
 	}
-	
+
 	// Unused
 	@Override
 	public void interact() {
@@ -48,10 +54,10 @@ public class Agent extends Cell {
 	@Override
 	public void nextState() {
 		// Maybe ??
-		if (status == 0) {
-			status = 1;
+		if (state == 0) {
+			state = 1;
 		} else {
-			status = 0;
+			state = 0;
 		}
 		notifySubscribers();
 	}
@@ -60,16 +66,16 @@ public class Agent extends Cell {
 	public void reset(boolean randomly) {
 		// 0 = dead, 1 = alive
 		if (randomly) {
-			status = (int) (Math.random() * 2);
+			state = (int) (Math.random() * 2);
 		} else {
-			status = 0;
+			state = 0;
 		}
 	}
 
 	@Override
 	public Color getColor() {
 		// 0 = dead, 1 = alive
-		if (status == 0) {
+		if (this.state == 0) {
 			return new Color(255, 0, 0);
 		} else {
 			return new Color(0, 255, 0);
@@ -81,7 +87,5 @@ public class Agent extends Cell {
 		// TODO Auto-generated method stub
 		return ambience;
 	}
-
-	
 
 }
