@@ -16,6 +16,5 @@ public class RunCommand extends Command {
     	} else if (runNumber.equals("RUN50")) {
     		grid.updateLoop(50);
     	}
-        
     }
 }

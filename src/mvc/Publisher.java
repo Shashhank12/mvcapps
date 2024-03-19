@@ -1,7 +1,5 @@
 package mvc;
 
-import mvc.*;
-
 import java.util.LinkedList;
 import java.util.List;
 

@@ -28,10 +28,5 @@ public class GridPanel extends AppPanel {
         }
     }
 
-    public static void main(String[] args) {
-        // Runnable once all classes are implemented
-        AppFactory factory = new GridFactory();
-        AppPanel panel = new GridPanel(factory);
-        panel.display();
-    }
+    public static void main(String[] args) {}
 }

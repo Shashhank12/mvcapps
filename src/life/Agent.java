@@ -10,7 +10,15 @@ public class Agent extends Cell {
 	private int ambience;
 
 	public Agent() {
-		state = 0;
+		this(true);
+	}
+
+	public Agent(boolean dead) {
+		if (dead) {
+			state = 0;
+		} else {
+			state = 1;
+		}
 		ambience = 0;
 	}
 
@@ -20,36 +28,33 @@ public class Agent extends Cell {
 		int sum = 0;
 		Iterator<Cell> it = super.neighbors.iterator();
 		while (it.hasNext()) {
-			sum++;
+			Cell c = it.next();
+			if (c.getStatus() == 1)
+				sum++;
 		}
-		ambience += sum;
-		// ambience = super.neighbors.size(); // #neighbors with state == 1
-		notifySubscribers();
+        ambience = sum;
 	}
 
 	@Override
 	public void update() {
 		// Each cell updates status
 		if (state == 1) {
-			if (ambience < 2 || ambience > 3) // Society.death.contains(ambience)
+			if (Society.death.contains(ambience)) // Society.death.contains(ambience)
 				state = 0;
 		} else {
-			if (ambience == 3)
+			if (Society.rebirth.contains(ambience)) // Society.rebirth.contains(ambience)
 				state = 1;
 		}
-		notifySubscribers(); //needed?
 	}
 
 	@Override
 	public int getStatus() {
-		return ambience;
+		return state;
 	}
 
 	// Unused
 	@Override
-	public void interact() {
-
-	}
+	public void interact() {}
 
 	@Override
 	public void nextState() {
@@ -59,7 +64,6 @@ public class Agent extends Cell {
 		} else {
 			state = 0;
 		}
-		notifySubscribers();
 	}
 
 	@Override
@@ -69,6 +73,7 @@ public class Agent extends Cell {
 			state = (int) (Math.random() * 2);
 		} else {
 			state = 0;
+			ambience = 0;
 		}
 	}
 
@@ -84,7 +89,6 @@ public class Agent extends Cell {
 
 	@Override
 	public int getAmbience() {
-		// TODO Auto-generated method stub
 		return ambience;
 	}
 

@@ -1,24 +1,12 @@
 package CALab;
 
-import javax.swing.JTextField;
-
-import bc.SetWidth;
 import mvc.*;
-public class GridFactory implements AppFactory {
+public abstract class GridFactory implements AppFactory {
     @Override
-    public Model makeModel() {
-    	return new Grid() {
-            @Override
-            public Cell makeCell(boolean uniform) {
-                return null;
-            }
-        };
-    }
+    public abstract Model makeModel();
 
     @Override
-    public View makeView(Model model) {
-        return new GridView((Grid) model);
-    }
+    public abstract View makeView(Model model);
 
     @Override
     public String getTitle() {

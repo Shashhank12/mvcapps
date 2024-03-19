@@ -1,6 +1,5 @@
 package mvc;
 
-import mvc.*;
 public abstract class Command {
     protected Model model;
 

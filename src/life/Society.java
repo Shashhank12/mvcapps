@@ -11,7 +11,6 @@ public class Society extends Grid {
 	public static Set<Integer> death = new HashSet<Integer>();
 	public static int percentAlive = 50;
 
-	/*
 	static {
 	     rebirth.add(3);
 	     death.add(0);
@@ -21,13 +20,19 @@ public class Society extends Grid {
 	     death.add(6);
 	     death.add(7);
 	     death.add(8);
-	 } */
+	 }
 
 	@Override
 	public Cell makeCell(boolean uniform) {
-		// TODO Auto-generated method stub
-		Agent agent = new Agent();
-		return agent;
+		if (uniform) {
+			return new Agent();
+		} else {
+			if (Math.random() < percentAlive / 100.0) {
+				return new Agent(false);
+			} else {
+				return new Agent(true);
+			}
+		}
 	}
 
 }

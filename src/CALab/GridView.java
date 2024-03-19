@@ -1,7 +1,5 @@
 package CALab;
 
-import javax.swing.*;
-
 import mvc.*;
 import java.awt.*;
 
@@ -37,7 +35,7 @@ public class GridView extends View {
     public void update() {
         // call update method of each CellView
     	for (int i = 0; i < cellViews.length; i++) {
-    		for (int j = 0; j < cellViews.length; j++) {
+    		for (int j = 0; j < cellViews[0].length; j++) {
         		cellViews[i][j].update();
         	}
     	}

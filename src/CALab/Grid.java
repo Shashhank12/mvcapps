@@ -39,7 +39,8 @@ public abstract class Grid extends Model {
 		// 2. use getNeighbors to set the neighbors field of each cell
 		for (int row = 0; row < dim; row++) {
 			for (int col = 0; col < dim; col++) {
-				cells[row][col] = makeCell(false);
+				Cell cell = makeCell(false);
+				cells[row][col] = cell;
 			}
 		}
 
@@ -48,6 +49,7 @@ public abstract class Grid extends Model {
 				cells[row][col].neighbors = getNeighbors(cells[row][col], 1);
 			}
 		}
+		repopulate(true);
 	}
 
 	// called when Populate button is clicked
@@ -68,7 +70,7 @@ public abstract class Grid extends Model {
 			}
 		}
 		// notify subscribers
-		notifySubscribers();
+		changed();
 	}
 
 	public Set<Cell> getNeighbors(Cell asker, int radius) {
@@ -92,7 +94,6 @@ public abstract class Grid extends Model {
 				int newCol = (col + j + dim) % dim;
 				if (newRow != row || newCol != col) {
 					neighbors.add(cells[newRow][newCol]);
-
 				}
 			}
 		}
@@ -105,10 +106,11 @@ public abstract class Grid extends Model {
 		// call each cell's observe method and notify subscribers
 		for (int row = 0; row < dim; row++) {
 			for (int col = 0; col < dim; col++) {
+				cells[row][col].neighbors = getNeighbors(cells[row][col], 1); //added
 				cells[row][col].observe();
-				//cells[row][col].notifySubscribers();
 			}
 		}
+
 		changed();
 	}
 
@@ -127,7 +129,6 @@ public abstract class Grid extends Model {
 		for (int row = 0; row < dim; row++) {
 			for (int col = 0; col < dim; col++) {
 				cells[row][col].update();
-				cells[row][col].notifySubscribers();
 			}
 		}
 		changed();

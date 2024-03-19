@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.*;
 
 public class AppPanel extends JPanel implements ActionListener, Subscriber {
 
@@ -26,7 +25,6 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         setLayout(new GridLayout(1, 2));
         this.add(view);
         if (model != null) {
-            model.addPropertyChangeListener(this);
             model.subscribe(this);
         }
 
@@ -34,7 +32,6 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         Container cp = frame.getContentPane();
         cp.add(this);
         frame.setJMenuBar(createMenuBar());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
@@ -70,8 +67,6 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
         this.model.subscribe(this);
         view.setModel(this.model);
         model.changed();
-
-        view.setModel(model);
     }
 
     @Override
@@ -101,11 +96,14 @@ public class AppPanel extends JPanel implements ActionListener, Subscriber {
             try {
                 command.execute();
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                handleException(e);
             }
         }
     }
 
+    protected  void handleException(Exception e) {
+        Utilities.error(e);
+    }
     @Override
     public void update() {/* no op, override if needed*/}
 }

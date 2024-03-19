@@ -27,6 +27,4 @@ public abstract class Model extends Publisher implements Serializable {
         return fileName;
     }
 
-    public void addPropertyChangeListener(AppPanel appPanel) {
-    }
 }

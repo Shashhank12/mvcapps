@@ -1,7 +1,5 @@
 package mvc;
 
-import mvc.*;
-
 import javax.swing.*;
 
 public class View extends JPanel implements Subscriber {
@@ -9,11 +7,14 @@ public class View extends JPanel implements Subscriber {
 
     public View(Model model) {
         this.model = model;
-        model.subscribe(this);
+        this.model.subscribe(this);
     }
 
     public void setModel(Model model) {
+        this.model.unsubscribe(this);
         this.model = model;
+        model.subscribe(this);
+        update();
     }
 
     @Override
