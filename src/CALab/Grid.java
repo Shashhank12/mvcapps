@@ -7,7 +7,7 @@ import mvc.Model;
 
 public abstract class Grid extends Model {
 	static private int time = 0;
-	protected int dim = 20;
+	protected static int dim = 20;
 	protected Cell[][] cells;
 
 	public int getDim() {
@@ -49,7 +49,7 @@ public abstract class Grid extends Model {
 				cells[row][col].neighbors = getNeighbors(cells[row][col], 1);
 			}
 		}
-		repopulate(true);
+		//repopulate(true);
 	}
 
 	// called when Populate button is clicked

@@ -40,4 +40,9 @@ public class CellView extends JButton implements ActionListener, Subscriber {
 		setText("" + myCell.getAmbience()); // getStatus(). getStatus in Agent returns status
 	}
 
+	public void setCell(Cell c) {
+		myCell.unsubscribe(this);
+		myCell = c;
+		if (c != null) { c.subscribe(this); }
+	}
 }

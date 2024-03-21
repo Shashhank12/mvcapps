@@ -10,7 +10,7 @@ public class LifePanel extends GridPanel {
 	public static void main(String[] args) {
 		// Runnable once all classes are implemented
 		AppFactory factory = new LifeFactory(); // changed GridFactory to AppFactory
-		AppPanel panel = new LifePanel(factory); // changed GridPanel to AppPanel
+		AppPanel panel = new LifePanel(factory); // changed GridPanel to AppPa el
 		panel.display();
 	}
 }

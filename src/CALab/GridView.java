@@ -41,4 +41,14 @@ public class GridView extends View {
     	}
     }
 
+    public void setModel(Model newModel) {
+        super.setModel(newModel);
+        Grid grid = (Grid)model;
+        for (int i = 0; i < Grid.dim; i++) {
+            for (int j = 0; j < Grid.dim; j++) {
+                cellViews[i][j].setCell(grid.getCell(i, j));
+            }
+        }
+        update();
+    }
 }
