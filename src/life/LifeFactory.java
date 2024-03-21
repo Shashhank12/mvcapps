@@ -17,6 +17,6 @@ public class LifeFactory extends GridFactory {
 
 	@Override
 	public String about() {
-		return "Life Lab using CALab + MVC framework.";
+		return "Life Lab using CALab + MVC framework by Andrew Pun and Shashhank Seethula";
 	}
 }

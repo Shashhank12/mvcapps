@@ -26,7 +26,7 @@ public abstract class GridFactory implements AppFactory {
     @Override
     public String about() {
         // Implement this method
-        return "CA Lab";
+        return "CA Lab by Andrew Pun and Shashhank Seethula";
     }
 
     @Override

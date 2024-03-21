@@ -6,8 +6,9 @@ import java.util.Set;
 import mvc.Model;
 
 public abstract class Grid extends Model {
-	static private int time = 0;
-	protected static int dim = 20;
+
+	public static int time = 0;
+	public static int dim = 20;
 	protected Cell[][] cells;
 
 	public int getDim() {
